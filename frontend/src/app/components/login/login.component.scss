@@ -1,0 +1,32 @@
+.login-page {
+  max-width: 40rem;
+}
+
+.login-log-button {
+  margin: 2rem 0 1rem 0;
+}
+
+.login-register-ahref {
+  margin: 2rem 0 1rem 0;
+}
+
+.login-confirm-button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.login-validation-error-info {
+  color: red;
+  font-size: smaller;
+}
+
+input.ng-valid.ng-dirty {
+  border-left: 5px solid green;
+  background: lightgreen;
+}
+
+input.ng-invalid.ng-dirty {
+  border-left: 5px solid darkred;
+  background: lightpink;
+}

@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Zmień id: {{ id }}</h3>
+
+      <div>
+        <form
+          *ngIf="updateClientForm"
+          [formGroup]="updateClientForm"
+          (ngSubmit)="onUpdate()"
+        >
+          <label for="updateName">nazwa</label>
+          <input
+            class="form-control"
+            type="text"
+            id="updateName"
+            formControlName="name"
+            maxlength="100"
+          />
+
+          <label for="updateCodeName">nazwa kodowa</label>
+          <input
+            class="form-control"
+            type="text"
+            id="updateCodeName"
+            formControlName="codeName"
+            maxlength="20"
+          />
+
+          <div
+            class="client-update-validation-error-info"
+            *ngIf="updateClientForm.get('codeName').errors?.pattern"
+          >
+            Nazwa kodowa może zawierać tylko duże litery i myślnik.
+          </div>
+
+          <label for="saveKeyAccount">opiekun</label>
+          <div class="client-update-choose-key-account">
+            <button
+              pButton
+              type="button"
+              (click)="onSelectKeyAccount()"
+              class="ui-button-primary"
+              icon="pi pi-users"
+            ></button>
+            <input
+              class="form-control"
+              type="text"
+              id="saveKeyAccount"
+              formControlName="keyAccount"
+            />
+            <button
+              pButton
+              type="button"
+              (click)="onDeleteKeyAccount()"
+              class="ui-button-danger"
+              icon="pi pi-user-minus"
+              [disabled]="isKeyAccountNotPresent()"
+            ></button>
+          </div>
+
+          <div class="client-update-update-cancel-buttons">
+            <div class="client-update-update-cancel-single-button">
+              <button
+                pButton
+                type="submit"
+                [disabled]="isInvalid()"
+                label="Zmień"
+                icon="pi pi-check"
+                class="ui-button-raised ui-button-success"
+              ></button>
+            </div>
+            <div class="client-update-update-cancel-single-button">
+              <button
+                pButton
+                type="button"
+                routerLink="/clients"
+                label="Anuluj"
+                icon="pi pi-times"
+                class="ui-button-raised ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <p-toast
+        position="center"
+        key="notUniqueCodename"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-times" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid client-update-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirm()"
+                label="OK"
+                class="ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-info-circle" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid client-update-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                routerLink="/clients"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>

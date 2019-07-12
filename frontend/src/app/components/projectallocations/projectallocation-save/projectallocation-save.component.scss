@@ -1,0 +1,53 @@
+.projectallocation-save-confirm-button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.projectallocations-save-role-level-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-save-workloads-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-save-dates-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-save-rate-input {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocation-save-choose-project {
+  display: flex;
+}
+
+.projectallocation-save-choose-employee {
+  display: flex;
+}
+
+.projectallocation-save-save-cancel-single-button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.projecallocation-save-save-cancel-buttons {
+  display: flex;
+  margin-top: 3rem;
+}
+
+input.ng-valid.ng-dirty {
+  border-left: 5px solid green;
+  background: lightgreen;
+}
+
+input.ng-invalid.ng-dirty {
+  border-left: 5px solid darkred;
+  background: lightpink;
+}
+

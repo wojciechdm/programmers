@@ -1,0 +1,272 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Rejestracja</h3>
+
+      <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <label for="username">nazwa użytkownika</label>
+          <input
+            class="form-control"
+            type="text"
+            id="username"
+            formControlName="username"
+            maxlength="40"
+          />
+          <div
+            class="registration-validation-error-info"
+            *ngIf="form.get('username').errors?.pattern"
+          >
+            Nazwa użytkownika może mieć od 5 do 40 znaków oraz składać się tylko
+            z liter i cyfr.
+          </div>
+
+          <label for="password">hasło</label>
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            formControlName="password"
+            maxlength="40"
+          />
+          <div
+            class="registration-validation-error-info"
+            *ngIf="form.get('password').errors?.pattern"
+          >
+            Hasło może mieć od 5 do 40 znaków oraz składać się tylko z liter i
+            cyfr.
+          </div>
+
+          <label for="firstName">imię</label>
+          <input
+            class="form-control"
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+          />
+
+          <div
+            class="registration-validation-error-info"
+            *ngIf="form.get('firstName').errors?.pattern"
+          >
+            Imię musi składać się z co najmniej 2 liter i nie może zawierać
+            innych znaków.
+          </div>
+
+          <label for="lastName">nazwisko</label>
+          <input
+            class="form-control"
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+          />
+
+          <div
+            class="registration-validation-error-info"
+            *ngIf="form.get('lastName').errors?.pattern"
+          >
+            Nazwisko musi składać się z co najmniej 2 liter, z ewentualnym
+            myślnikiem rozdzielającym człony nazwiska.
+          </div>
+
+          <div class="registration-age">
+            <div>
+              <label for="age">wiek</label>
+              <input
+                class="form-control"
+                type="number"
+                id="age"
+                formControlName="age"
+                min="1"
+                max="120"
+              />
+            </div>
+
+            <div></div>
+
+            <div>
+              <label for="dateOfBirth">data urodzenia</label>
+              <input
+                class="form-control"
+                type="date"
+                id="dateOfBirth"
+                formControlName="dateOfBirth"
+                max="9999-12-31"
+              />
+            </div>
+          </div>
+
+          <form [formGroup]="form.controls.address">
+            <label for="city">miejscowość</label>
+            <input
+              class="form-control"
+              type="text"
+              id="city"
+              formControlName="city"
+            />
+
+            <div
+              class="registration-validation-error-info"
+              *ngIf="form.get('address').get('city').errors?.pattern"
+            >
+              Miejscowość musi składać się z co najmniej 2 liter, z ewentualnym
+              myślnikiem lub spacją rozdzielającą człony nazwy.
+            </div>
+
+            <label for="street">ulica</label>
+            <input
+              class="form-control"
+              type="text"
+              id="street"
+              formControlName="street"
+            />
+
+            <div
+              class="registration-validation-error-info"
+              *ngIf="form.get('address').get('street').errors?.pattern"
+            >
+              Ulica musi składać się z co najmniej 2 liter, z ewentualnym
+              myślnikiem lub spacją rozdzielającą człony nazwy.
+            </div>
+
+            <div class="registration-number">
+              <div>
+                <label for="number">numer</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="number"
+                  formControlName="number"
+                />
+
+                <div
+                  class="registration-validation-error-info"
+                  *ngIf="form.get('address').get('number').errors?.pattern"
+                >
+                  Numer musi być podany w formacie: xx, xxy, xxy/xxy, xx/xxy lub
+                  xxy/xx, gdzie "xx" oznacza liczbę, a "y" literę.
+                </div>
+              </div>
+
+              <div></div>
+
+              <div>
+                <label for="zipcode">kod pocztowy</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="zipcode"
+                  formControlName="zipcode"
+                  placeholder="xx-xxx"
+                />
+
+                <div
+                  class="registration-validation-error-info"
+                  *ngIf="form.get('address').get('zipcode').errors?.pattern"
+                >
+                  Kod pocztowy musi być podany w formacie xx-xxx i składać się
+                  wyłącznie z cyfr i myślnika.
+                </div>
+              </div>
+            </div>
+
+            <label for="country">kraj</label>
+            <app-autocomplete
+              id="country"
+              [inputClass]="getInputCountryClass()"
+              formControlName="country"
+            ></app-autocomplete>
+
+            <div
+              class="registration-validation-error-info"
+              *ngIf="form.get('address').get('country').errors?.pattern"
+            >
+              Kraj musi składać się z co najmniej 2 znaków i może zawierać
+              wyłącznie litery, myślnik, spację, apostrof i nawias.
+            </div>
+          </form>
+          <div>
+            <p-radioButton
+              class="ui-g-12"
+              name="title"
+              value="pan"
+              label="pan"
+              formControlName="title"
+            ></p-radioButton>
+          </div>
+          <div>
+            <p-radioButton
+              class="ui-g-12"
+              name="title"
+              value="pani"
+              label="pani"
+              formControlName="title"
+            ></p-radioButton>
+          </div>
+
+          <div class="registration-register-button">
+            <button
+              pButton
+              type="submit"
+              label="Zarejestruj"
+              class="ui-button-raised ui-button-success"
+              [disabled]="isInvalid()"
+            ></button>
+          </div>
+        </form>
+      </div>
+
+      <p-toast
+        position="center"
+        key="notUniqueUsername"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-times" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid registration-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirmWarning()"
+                label="OK"
+                class="ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-info-circle" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid registration-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirmSuccess()"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>

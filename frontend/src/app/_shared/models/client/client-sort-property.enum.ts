@@ -1,0 +1,8 @@
+export enum ClientSortProperty {
+  ID = "ID",
+  NAME = "NAME",
+  CODE_NAME = "CODE_NAME",
+  KEY_ACCOUNT = "KEY_ACCOUNT",
+  CREATE_DATE = "CREATE_DATE",
+  LAST_MODIFICATION_DATE = "LAST_MODIFICATION_DATE"
+}

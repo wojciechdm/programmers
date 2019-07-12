@@ -1,0 +1,199 @@
+<div class="row">
+  <div class="col-xs-12" *ngIf="clientsResponse">
+    <h3>Klienci</h3>
+
+    <div>
+      <table class="table table-striped table-bordered client-list-table">
+        <thead>
+          <tr>
+            <th>
+              <div>
+                <p-checkbox
+                  name="groupname"
+                  [binary]="true"
+                  (onChange)="onCheckAll()"
+                  [ngModel]="checkedAll"
+                ></p-checkbox>
+              </div>
+            </th>
+            <th>
+              <div class="client-list-sort-header" (click)="onSort('ID')">
+                <div *ngIf="isActualSort('ID', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('ID', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>id</div>
+              </div>
+            </th>
+            <th>
+              <div class="client-list-sort-header" (click)="onSort('NAME')">
+                <div *ngIf="isActualSort('NAME', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('NAME', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>nazwa</div>
+              </div>
+            </th>
+            <th>
+              <div
+                class="client-list-sort-header"
+                (click)="onSort('CODE_NAME')"
+              >
+                <div *ngIf="isActualSort('CODE_NAME', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('CODE_NAME', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>nazwa kodowa</div>
+              </div>
+            </th>
+            <th>
+              <div
+                class="client-list-sort-header"
+                (click)="onSort('KEY_ACCOUNT')"
+              >
+                <div *ngIf="isActualSort('KEY_ACCOUNT', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('KEY_ACCOUNT', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>opiekun</div>
+              </div>
+            </th>
+            <th>
+              <div
+                class="client-list-sort-header"
+                (click)="onSort('CREATE_DATE')"
+              >
+                <div *ngIf="isActualSort('CREATE_DATE', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('CREATE_DATE', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>data utworzenia</div>
+              </div>
+            </th>
+            <th>
+              <div
+                class="client-list-sort-header"
+                (click)="onSort('LAST_MODIFICATION_DATE')"
+              >
+                <div *ngIf="isActualSort('LAST_MODIFICATION_DATE', false)">
+                  <i class="pi pi-caret-up"></i>
+                </div>
+                <div *ngIf="isActualSort('LAST_MODIFICATION_DATE', true)">
+                  <i class="pi pi-caret-down"></i>
+                </div>
+                <div>data ostatniej modyfikacji</div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clientsResponse.data">
+            <td>
+              <p-checkbox
+                name="groupname"
+                (onChange)="onCheck()"
+                [value]="client.id"
+                [(ngModel)]="checked"
+              ></p-checkbox>
+            </td>
+            <td>{{ client.id }}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.codeName }}</td>
+            <td>
+              <button
+                [disabled]="!client.keyAccount"
+                pButton
+                type="button"
+                routerLink="/employees/employee-show"
+                [queryParams]="{ id: client.keyAccount }"
+                class=" ui-button-primary"
+                icon="pi pi-user"
+                pTooltip="id: {{ client.keyAccount }}"
+                tooltipPosition="right"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+            <td>{{ client.createDate }}</td>
+            <td>{{ client.lastModificationDate }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="client-update"
+                [queryParams]="{ id: client.id }"
+                label="Zmień"
+                icon="pi pi-pencil"
+                class="ui-button-raised ui-button-primary"
+              ></button>
+            </td>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="client-show"
+                [queryParams]="{ id: client.id }"
+                label="Szczegóły"
+                icon="pi pi-info"
+                class="ui-button-raised ui-button-primary"
+              ></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="client-list-add-delete-refresh-buttons">
+      <div class="client-list-add-delete-refresh-single-button">
+        <button
+          pButton
+          type="button"
+          routerLink="client-save"
+          label="Dodaj"
+          icon="pi pi-plus"
+          class="ui-button-raised ui-button-success"
+        ></button>
+      </div>
+      <div class="client-list-add-delete-refresh-single-button">
+        <button
+          pButton
+          type="button"
+          (click)="onDelete()"
+          label="Usuń"
+          icon="pi pi-minus"
+          class="ui-button-raised ui-button-danger"
+          [disabled]="isDeleteDisabled()"
+        ></button>
+      </div>
+      <div class="client-list-add-delete-refresh-single-button">
+        <button
+          pButton
+          type="button"
+          (click)="onReload()"
+          label="Odśwież"
+          icon="pi pi-refresh"
+          class="ui-button-raised ui-button-primary"
+        ></button>
+      </div>
+    </div>
+
+    <div class="client-list-paginator">
+      <p-paginator
+        [rows]="actualElementsPerPage"
+        [pageLinkSize]="10"
+        [totalRecords]="clientsResponse.total"
+        [rowsPerPageOptions]="elementsPerPage"
+        (onPageChange)="onPageChange($event)"
+      ></p-paginator>
+    </div>
+  </div>
+</div>

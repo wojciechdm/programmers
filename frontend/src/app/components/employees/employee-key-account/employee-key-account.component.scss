@@ -1,0 +1,24 @@
+.employee-key-account-sort-header {
+  cursor: pointer;
+  display: flex;
+}
+
+.employee-key-account-page {
+  max-width: 90rem;
+}
+
+.employee-key-account-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.employee-key-account-table th div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.employee-key-account-table td {
+  text-align: center;
+}

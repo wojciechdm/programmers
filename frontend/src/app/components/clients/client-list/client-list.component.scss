@@ -1,0 +1,28 @@
+.client-list-sort-header {
+  display: flex;
+  cursor: pointer;
+}
+
+.client-list-add-delete-refresh-single-button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.client-list-add-delete-refresh-buttons {
+  display: flex;
+}
+
+.client-list-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.client-list-table th div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.client-list-table td {
+  text-align: center;
+}

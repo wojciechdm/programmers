@@ -1,0 +1,33 @@
+package com.wojciechdm.programmers.company.structure.project;
+
+import lombok.*;
+
+@Getter
+@AllArgsConstructor
+enum ProjectSqlStatementParameter {
+  INSERT_NAME(1),
+  INSERT_CODE_NAME(2),
+  INSERT_START_DATE(3),
+  INSERT_END_DATE(4),
+  INSERT_STATUS(5),
+  INSERT_CREATE_DATE(6),
+  INSERT_LAST_MODIFICATION_DATE(7),
+  INSERT_CLIENT_ID(8),
+  SELECT_ID(1),
+  SELECT_BY_CLIENT_ID(1),
+  UPDATE_NAME(1),
+  UPDATE_CODE_NAME(2),
+  UPDATE_START_DATE(3),
+  UPDATE_END_DATE(4),
+  UPDATE_STATUS(5),
+  UPDATE_LAST_MODIFICATION_DATE(6),
+  UPDATE_CLIENT_ID(7),
+  UPDATE_ID(8),
+  DELETE_ID(1),
+  SELECT_CODE_NAME_NAME(1),
+  SELECT_CODE_NAME_ID(2),
+  LIMIT_PAGE(1),
+  LIMIT_ELEMENTS(2);
+
+  private int parameterNumber;
+}

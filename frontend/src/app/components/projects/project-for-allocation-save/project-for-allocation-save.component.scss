@@ -1,0 +1,24 @@
+.project-for-allocation-save-sort-header {
+  cursor: pointer;
+  display: flex;
+}
+
+.project-for-allocation-save-page {
+  max-width: 90rem;
+}
+
+.project-for-allocation-save-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.project-for-allocation-save-table th div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.project-for-allocation-save-table td {
+  text-align: center;
+}

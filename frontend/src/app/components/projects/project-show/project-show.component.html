@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h3>Projekt</h3>
+
+      <div>
+        <table class="table table-striped" *ngIf="project">
+          <tr>
+            <th>id</th>
+            <td>{{ project.id }}</td>
+          </tr>
+          <tr>
+            <th>nazwa</th>
+            <td>{{ project.name }}</td>
+          </tr>
+          <tr>
+            <th>nazwa kodowa</th>
+            <td>{{ project.codeName }}</td>
+          </tr>
+          <tr>
+            <th>data rozpoczęcia</th>
+            <td>{{ project.startDate }}</td>
+          </tr>
+          <tr>
+            <th>data zakończenia</th>
+            <td>{{ project.endDate }}</td>
+          </tr>
+          <tr>
+            <th>status</th>
+            <td>{{ project.status | projectStatus }}</td>
+          </tr>
+          <tr>
+            <th>data utworzenia</th>
+            <td>{{ project.createDate }}</td>
+          </tr>
+          <tr>
+            <th>data ostatniej modyfikacji</th>
+            <td>{{ project.lastModificationDate }}</td>
+          </tr>
+          <tr>
+            <th>klient</th>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="/clients/client-show"
+                [queryParams]="{ id: project.clientId }"
+                class=" ui-button-primary"
+                icon="pi pi-user"
+                pTooltip="id: {{ project.clientId }}"
+                tooltipPosition="left"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isProjectallocationsPresent()">
+    <div class="col-xs-12">
+      <h4>Przypisania</h4>
+
+      <div>
+        <table class="table table-striped">
+          <tr>
+            <th>id</th>
+            <th>pracownik</th>
+            <th>data rozpoczęcia</th>
+            <th>data zakończenia</th>
+            <th>zaangażowanie procentowe</th>
+            <th>zaangazowanie godzinowe</th>
+            <th>poziom</th>
+            <th>rola</th>
+            <th>stawka</th>
+          </tr>
+          <tr *ngFor="let projectallocation of projectallocations">
+            <td>{{ projectallocation.id }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="/employees/employee-show"
+                [queryParams]="{ id: projectallocation.employeeId }"
+                class=" ui-button-primary"
+                icon="pi pi-user"
+                pTooltip="id: {{ projectallocation.employeeId }}"
+                tooltipPosition="right"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+            <td>{{ projectallocation.startDate }}</td>
+            <td>{{ projectallocation.endDate }}</td>
+            <td>{{ projectallocation.percentileWorkload }}</td>
+            <td>{{ projectallocation.hoursPerMonthWorkload }}</td>
+            <td>{{ projectallocation.level | employeeLevel }}</td>
+            <td>{{ projectallocation.role | employeeRole }}</td>
+            <td>{{ projectallocation.rateMonthly }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="project-show-projects-list-button">
+        <button
+          pButton
+          type="button"
+          routerLink="/projects"
+          label="Projekty"
+          class="ui-button-primary"
+          icon="pi pi-list"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

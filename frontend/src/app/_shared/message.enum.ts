@@ -1,0 +1,23 @@
+export enum Message {
+  APPLICATION_ERROR = "Problem z aplikacją. Spróbuj później.",
+  CLIENT_NOT_UNIQUE_CODE_NAME = "Podana nazwa kodowa już istnieje.",
+  CLIENT_CHANGED = "Zmieniono klienta id:",
+  CLIENT_SELECT_KEY_ACCOUNT = "Wybierz opiekuna",
+  CLIENT_ADDED = "Dodano klienta.",
+  EMPLOYEE_ADDED = "Dodano pracownika.",
+  EMPLOYEE_CHANGED = "Zmieniono pracownika id:",
+  PROJECT_ALLOCATION_ADDED = "Dodano przypisanie projektu.",
+  PROJECT_ALLOCATION_SELECT_EMPLOYEE = "Wybierz pracownika",
+  PROJECT_ALLOCATION_SELECT_PROJECT = "Wybierz projekt",
+  PROJECT_ALLOCATION_CHANGED = "Zmieniono przypisanie id:",
+  PROJECT_NOT_UNIQUE_CODE_NAME = "Podana nazwa kodowa dla danego klienta już istnieje.",
+  PROJECT_ADDED = "Dodano projekt.",
+  PROJECT_SELECT_CLIENT = "Wybierz klienta",
+  PROJECT_CHANGED = "Zmieniono projekt id:",
+  REGISTRATION_SUCCESS = "Pomyślnie zarejestrowano.",
+  REGISTRATION_NOT_UNIQUE_USERNAME = "Podana nazwa użytkownika jest już zajęta.",
+  LOGIN_SUCCESS = "Pomyślnie zalogowano.",
+  LOGIN_INCORRECT_USERNAME_PASSWORD = "Niepoprawna nazwa użytkownia lub hasło.",
+  LOGIN = "Zaloguj się",
+  LOGOUT_SUCCESS = "Pomyślnie wylogowano."
+}

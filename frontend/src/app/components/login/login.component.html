@@ -1,0 +1,106 @@
+<div class="container login-page">
+  <div class="row">
+    <div class="col-xs-12">
+      <div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <label for="username">nazwa użytkownika</label>
+          <input
+            class="form-control"
+            type="text"
+            id="username"
+            formControlName="username"
+            maxlength="40"
+          />
+          <div
+            class="login-validation-error-info"
+            *ngIf="loginForm.get('username').errors?.pattern"
+          >
+            Nazwa użytkownika może mieć od 5 do 40 znaków oraz składać się tylko
+            z liter i cyfr.
+          </div>
+
+          <label for="password">hasło</label>
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            formControlName="password"
+            maxlength="40"
+          />
+          <div
+            class="login-validation-error-info"
+            *ngIf="loginForm.get('password').errors?.pattern"
+          >
+            Hasło może mieć od 5 do 40 znaków oraz składać się tylko z liter i
+            cyfr.
+          </div>
+
+          <div class="login-log-button">
+            <button
+              pButton
+              type="submit"
+              [disabled]="isInvalid()"
+              label="Zaloguj"
+              icon="pi pi-sign-in"
+              class="ui-button-raised ui-button-success"
+            ></button>
+          </div>
+        </form>
+        <div class="login-register-ahref">
+          <a routerLink="/registration" (click)="onClose()"
+            ><p>Zarejestruj się</p></a
+          >
+        </div>
+      </div>
+
+      <p-toast
+        position="center"
+        key="incorrectUsernamePassword"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-times" style="font-size: 3em"></i>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid login-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirmIncorrectUsernamePassword()"
+                label="OK"
+                class="ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-check" style="font-size: 3em"></i>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid login-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onClose()"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>
