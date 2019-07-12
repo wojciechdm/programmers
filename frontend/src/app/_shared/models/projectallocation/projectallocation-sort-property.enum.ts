@@ -1,0 +1,8 @@
+export enum ProjectallocationSortProperty {
+  ID='ID',
+  PROJECT='PROJECT',
+  EMPLOYEE='EMPLOYEE',
+  START_DATE='START_DATE',
+  END_DATE='END_DATE',
+  RATE_MONTHLY='RATE_MONTHLY'
+}

@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h3>Przypisanie projektu</h3>
+
+      <div>
+        <table class="table table-striped" *ngIf="projectallocation">
+          <tr>
+            <th>id</th>
+            <td>{{ projectallocation.id }}</td>
+          </tr>
+          <tr>
+            <th>projekt</th>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="/projects/project-show"
+                [queryParams]="{ id: projectallocation.projectId }"
+                class=" ui-button-primary"
+                icon="pi pi-file"
+                pTooltip="id: {{ projectallocation.projectId }}"
+                tooltipPosition="left"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <th>pracownik</th>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="/employees/employee-show"
+                [queryParams]="{ id: projectallocation.employeeId }"
+                class="ui-button-primary"
+                icon="pi pi-user"
+                pTooltip="id: {{ projectallocation.employeeId }}"
+                tooltipPosition="left"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <th>data rozpoczęcia</th>
+            <td>{{ projectallocation.startDate }}</td>
+          </tr>
+          <tr>
+            <th>data zakończenia</th>
+            <td>{{ projectallocation.endDate }}</td>
+          </tr>
+          <tr>
+            <th>zaangażowanie</th>
+            <td *ngIf="projectallocation.percentileWorkload">
+              {{ projectallocation.percentileWorkload }}%
+            </td>
+            <td *ngIf="projectallocation.hoursPerMonthWorkload">
+              {{ projectallocation.hoursPerMonthWorkload }}h
+            </td>
+          </tr>
+          <tr>
+            <th>rola i poziom</th>
+            <td>
+              {{ projectallocation.level | employeeLevel }}
+              {{ projectallocation.role | employeeRole }}
+            </td>
+          </tr>
+          <tr>
+            <th>stawka miesięczna</th>
+            <td>{{ projectallocation.rateMonthly }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="projectallocation-show-projectallocations-list-button">
+        <button
+          pButton
+          type="button"
+          routerLink="/projectallocations"
+          label="Przypisania"
+          class="ui-button-primary"
+          icon="pi pi-list"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

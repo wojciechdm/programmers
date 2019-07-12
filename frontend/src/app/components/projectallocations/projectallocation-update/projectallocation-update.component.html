@@ -1,0 +1,233 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Zmień id: {{ id }}</h3>
+
+      <div>
+        <form
+          *ngIf="updateProjectallocationForm"
+          [formGroup]="updateProjectallocationForm"
+          (ngSubmit)="onUpdate()"
+        >
+          <label for="saveProject">projekt</label>
+          <div class="projectallocation-update-choose-project">
+            <button *ngIf="project.startDate"
+              pButton
+              type="button"
+              (click)="onSelectProject()"
+              class="ui-button-primary"
+              icon="pi pi-copy"
+              pTooltip="{{ project.startDate }}
+                        {{ project.endDate}}"
+              tooltipPosition="right"
+              tooltipEvent="hover"
+            ></button>          
+            <button *ngIf="!project.startDate"
+            pButton
+            type="button"
+            (click)="onSelectProject()"
+            class="ui-button-primary"
+            icon="pi pi-copy"
+          ></button>
+            <input
+              class="form-control"
+              type="text"
+              id="saveProject"
+              formControlName="project"
+            />
+          </div>
+
+          <label for="saveEmployee">pracownik</label>
+          <div class="projectallocation-update-choose-employee">
+            <button *ngIf="employee.roles"
+              pButton
+              type="button"
+              (click)="onSelectEmployee()"
+              class="ui-button-primary"
+              icon="pi pi-users"
+              pTooltip="{{ employee.roles | employeeRoleLevel }}"
+              tooltipPosition="right"
+              tooltipEvent="hover"
+            ></button>
+            <button *ngIf="!employee.roles"
+            pButton
+            type="button"
+            (click)="onSelectEmployee()"
+            class="ui-button-primary"
+            icon="pi pi-users"           
+          ></button>
+            <input
+              class="form-control"
+              type="text"
+              id="saveEmployee"
+              formControlName="employee"
+            />
+          </div>
+
+          <div class="projectallocations-update-dates-inputs">
+            <div>
+              <label for="startDate">data rozpoczęcia</label>
+              <input
+                class="form-control"
+                type="date"
+                id="startDate"
+                formControlName="startDate"
+                max="9999-12-31"
+              />
+            </div>
+
+            <div></div>
+
+            <div>
+              <label for="endDate">data zakończenia</label>
+              <input
+                class="form-control"
+                type="date"
+                id="endDate"
+                formControlName="endDate"
+                max="9999-12-31"
+              />
+            </div>
+          </div>
+          <div class="projectallocations-update-workloads-inputs">
+            <div>
+              <label for="percentileWorkload">zaangażowanie [%]</label>
+              <input
+                [attr.disabled]="isHoursPerMonthWorkloadPresent() || null"
+                class="form-control"
+                type="number"
+                id="percentileWorkload"
+                formControlName="percentileWorkload"
+                min="0"
+              />
+            </div>
+
+            <div></div>
+
+            <div>
+              <label for="hoursPerMonthWorkload">zaangażowanie [godz.]</label>
+              <input
+                [attr.disabled]="isPercentileWorkloadPresent() || null"
+                class="form-control"
+                type="number"
+                id="hoursPerMonthWorkload"
+                formControlName="hoursPerMonthWorkload"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div class="projectallocations-update-role-level-inputs">
+            <div>
+              <label for="role">rola</label>
+              <select class="form-control" id="role" formControlName="role">
+                <option *ngFor="let role of roles" [value]="role">{{
+                  role | employeeRole
+                }}</option>
+              </select>
+            </div>
+
+            <div></div>
+
+            <div>
+              <label for="level">poziom</label>
+              <select class="form-control" id="level" formControlName="level">
+                <option *ngFor="let level of levels" [value]="level">{{
+                  level | employeeLevel
+                }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="projectallocations-update-rate-input">
+            <div>
+              <label for="rateMonthly">stawka miesięczna</label>
+              <input
+                class="form-control"
+                type="number"
+                id="rateMonthly"
+                formControlName="rateMonthly"
+                min="1"
+              />
+            </div>
+          </div>
+
+          <div class="projecallocation-update-update-cancel-buttons">
+            <div class="projectallocation-update-update-cancel-single-button">
+              <button
+                pButton
+                type="submit"
+                [disabled]="isInvalid()"
+                label="Zmień"
+                icon="pi pi-check"
+                class="ui-button-raised ui-button-success"
+              ></button>
+            </div>
+            <div class="projectallocation-update-update-cancel-single-button">
+              <button
+                pButton
+                type="button"
+                routerLink="/projectallocations"
+                label="Anuluj"
+                icon="pi pi-times"
+                class="ui-button-raised ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <p-toast
+        position="center"
+        key="invalidProjectallocation"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-times" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid projectallocation-update-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirm()"
+                label="OK"
+                class="ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-info-circle" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid projectallocation-update-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                routerLink="/projectallocations"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>

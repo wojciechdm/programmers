@@ -1,0 +1,24 @@
+.client-for-project-save-sort-header {
+  display: flex;
+  cursor: pointer;
+}
+
+.client-for-project-save-paginator-page {
+  max-width: 70rem;
+}
+
+.client-for-project-save-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.client-for-project-table th div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.client-for-project-table td {
+  text-align: center;
+}

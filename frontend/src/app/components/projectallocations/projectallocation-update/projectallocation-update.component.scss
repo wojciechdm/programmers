@@ -1,0 +1,53 @@
+.projectallocation-update-confirm-button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.projectallocations-update-role-level-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-update-workloads-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-update-dates-inputs {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocations-update-rate-input {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.projectallocation-update-choose-project {
+  display: flex;
+}
+
+.projectallocation-update-choose-employee {
+  display: flex;
+}
+
+.projectallocation-update-update-cancel-single-button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.projecallocation-update-update-cancel-buttons {
+  display: flex;
+  margin-top: 3rem;
+}
+
+input.ng-valid.ng-dirty {
+  border-left: 5px solid green;
+  background: lightgreen;
+}
+
+input.ng-invalid.ng-dirty {
+  border-left: 5px solid darkred;
+  background: lightpink;
+}
+

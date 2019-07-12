@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h3>Klient</h3>
+
+      <div>
+        <table class="table table-striped" *ngIf="client">
+          <tr>
+            <th>id</th>
+            <td>{{ client.id }}</td>
+          </tr>
+          <tr>
+            <th>nazwa</th>
+            <td>{{ client.name }}</td>
+          </tr>
+          <tr>
+            <th>nazwa kodowa</th>
+            <td>{{ client.codeName }}</td>
+          </tr>
+          <tr>
+            <th>opiekun</th>
+            <td>
+              <button
+                [disabled]="!client.keyAccount"
+                pButton
+                type="button"
+                routerLink="/employees/employee-show"
+                [queryParams]="{ id: client.keyAccount }"
+                class=" ui-button-primary"
+                icon="pi pi-user"
+                pTooltip="id: {{ client.keyAccount }}"
+                tooltipPosition="right"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+          </tr>
+          <tr>
+            <th>data utworzenia</th>
+            <td>{{ client.createDate }}</td>
+          </tr>
+          <tr>
+            <th>data ostatniej modyfikacji</th>
+            <td>{{ client.lastModificationDate }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isProjectsPresent()">
+    <div class="col-xs-12">
+      <h4>Projekty</h4>
+
+      <div>
+        <table class="table table-striped">
+          <tr>
+            <th>id</th>
+            <th>nazwa</th>
+            <th>nazwa kodowa</th>
+            <th>data rozpoczęcia</th>
+            <th>data zakończenia</th>
+            <th>status</th>
+            <th>data utworzenia</th>
+            <th colspan="2">data ostatniej modyfikacji</th>
+          </tr>
+          <tr *ngFor="let project of projects">
+            <td>{{ project.id }}</td>
+            <td>{{ project.name }}</td>
+            <td>{{ project.codeName }}</td>
+            <td>{{ project.startDate }}</td>
+            <td>{{ project.endDate }}</td>
+            <td>{{ project.status | projectStatus }}</td>
+            <td>{{ project.createDate }}</td>
+            <td>{{ project.lastModificationDate }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                routerLink="/projects/project-show"
+                [queryParams]="{ id: project.id }"
+                class=" ui-button-primary"
+                icon="pi pi-file"
+                pTooltip="id: {{ project.id }}"
+                tooltipPosition="left"
+                tooltipEvent="hover"
+              ></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="client-show-clients-list-button">
+        <button
+          pButton
+          type="button"
+          routerLink="/clients"
+          label="Klienci"
+          class="ui-button-primary"
+          icon="pi pi-list"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

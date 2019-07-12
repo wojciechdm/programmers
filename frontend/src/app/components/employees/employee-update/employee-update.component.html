@@ -1,0 +1,186 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Zmień id: {{ id }}</h3>
+
+      <div>
+        <form
+          *ngIf="updateEmployeeForm"
+          [formGroup]="updateEmployeeForm"
+          (ngSubmit)="onUpdate()"
+        >
+          <label for="firstName">Imię</label>
+          <input
+            class="form-control"
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            maxlength="50"
+          />
+
+          <div
+            class="employee-update-validation-error-info"
+            *ngIf="updateEmployeeForm.get('firstName').errors?.pattern"
+          >
+            Imię musi składać się z co najmniej 2 liter i nie może zawierać
+            innych znaków.
+          </div>
+
+          <label for="lastName">Nazwisko</label>
+          <input
+            class="form-control"
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            maxlength="50"
+          />
+
+          <div
+            class="employee-update-validation-error-info"
+            *ngIf="updateEmployeeForm.get('lastName').errors?.pattern"
+          >
+            Nazwisko musi składać się z co najmniej 2 liter, z ewentualnym
+            myślnikiem rozdzielającym człony nazwiska.
+          </div>
+
+          <label for="pesel">pesel</label>
+          <input
+            class="form-control"
+            type="text"
+            id="pesel"
+            formControlName="pesel"
+            maxlength="11"
+          />
+
+          <div
+            class="employee-update-validation-error-info"
+            *ngIf="updateEmployeeForm.get('pesel').errors?.pattern"
+          >
+            Pesel musi składać się z 11 cyfr.
+          </div>
+
+          <div class="employee-update-employment-date-status-input">
+            <div>
+              <label for="employmentDate">data zatrudnienia</label>
+              <input
+                class="form-control"
+                type="date"
+                id="employmentDate"
+                formControlName="employmentDate"
+                max="9999-12-31"
+              />
+            </div>
+
+            <div></div>
+
+            <div>
+              <label for="status">status</label>
+              <select class="form-control" id="status" formControlName="status">
+                <option *ngFor="let stat of statuses" [value]="stat">{{
+                  stat | employeeStatus
+                }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            formArrayName="roles"
+            *ngFor="
+              let nextRole of updateEmployeeForm.controls.roles?.value;
+              let i = index
+            "
+          >
+            <div class="employee-update-role-level-input" [formGroupName]="i">
+              <div>
+                <label for="role">rola</label>
+                <select class="form-control" id="role" formControlName="role">
+                  <option *ngFor="let role of roles" [value]="role">{{
+                    role | employeeRole
+                  }}</option>
+                </select>
+              </div>
+
+              <div class="employee-update-delete-role-button">
+                <button
+                  pButton
+                  [className]="
+                    isHiddenDeleteButton(i) ? 'employee-update-delete-role-button-hidden' : 'ui-button-danger'
+                  "
+                  type="button"
+                  icon="pi pi-minus"
+                  (click)="onDeleteRole(i)"
+                ></button>
+              </div>
+
+              <div>
+                <label for="level">poziom</label>
+                <select class="form-control" id="level" formControlName="level">
+                  <option *ngFor="let level of levels" [value]="level">{{
+                    level | employeeLevel
+                  }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="employee-update-add-role-button">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-plus"
+              (click)="onAddRole()"
+            ></button>
+          </div>
+
+          <div class="employee-update-save-cancel-buttons">
+            <div class="employee-update-save-cancel-single-button">
+              <button
+                pButton
+                type="submit"
+                [disabled]="isInvalid()"
+                label="Zmień"
+                icon="pi pi-check"
+                class="ui-button-raised ui-button-success"
+              ></button>
+            </div>
+            <div class="employee-update-save-cancel-single-button">
+              <button
+                pButton
+                type="button"
+                routerLink="/employees"
+                label="Anuluj"
+                icon="pi pi-times"
+                class="ui-button-raised ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-info-circle" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid employee-update-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                routerLink="/employees"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>

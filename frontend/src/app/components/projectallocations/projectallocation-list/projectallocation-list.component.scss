@@ -1,0 +1,28 @@
+.projectallocation-list-sort-header {
+  cursor: pointer;
+  display: flex;
+}
+
+.projectallocation-list-add-delete-refresh-single-button  {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.projectallocation-list-add-delete-refresh-buttons {
+  display: flex;
+}
+
+.projectallocation-list-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.projectallocation-list-table th div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.projectallocation-list-table td {
+  text-align: center;
+}

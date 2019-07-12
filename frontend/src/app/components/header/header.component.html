@@ -1,0 +1,59 @@
+<nav class="navbar navbar-light bg-info">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink="/"><span class="navbar-brand">Master of IT</span></a>
+    </div>
+    <div class="navbar-default">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="clients">Klienci</a></li>
+        <li><a routerLink="employees">Pracownicy</a></li>
+        <li><a routerLink="projects">Projekty</a></li>
+        <li><a routerLink="projectallocations">Przypisania projektów</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <div class="header-log-button">
+            <button
+              *ngIf="!isLoggedIn()"
+              pButton
+              type="button"
+              class="ui-button-primary"
+              (click)="onLogin()"
+              icon="pi pi-sign-in"
+              label="Zaloguj"
+            ></button>
+            <button
+              *ngIf="isLoggedIn()"
+              pButton
+              type="button"
+              class="ui-button-primary"
+              (click)="onLogout()"
+              icon="pi pi-sign-in"
+              label="Wyloguj"
+            ></button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<p-toast position="center" key="success" [modal]="true" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-check" style="font-size: 3em"></i>
+      <p>{{ message.detail }}</p>
+    </div>
+    <div class="ui-g ui-fluid header-confirm-button">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="onConfirmMessage()"
+          label="OK"
+          class="ui-button-success"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

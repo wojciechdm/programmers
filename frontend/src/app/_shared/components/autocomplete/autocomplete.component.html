@@ -1,0 +1,14 @@
+<input
+  [ngClass]="inputClass"
+  class="form-control"
+  type="text"
+  [value]="value"
+  (input)="pushChange($event.target.value)"
+/>
+
+<div *ngIf="countries">
+  <pre *ngFor="let country of countries">
+  <a class="autocomplete-country-ahref" (click)="chooseCountry(country.name)">
+    <img class="autocomplete-country-flag-img" alt="" [src]="country.flag"><span>{{country.name}}</span></a>
+</pre>
+</div>

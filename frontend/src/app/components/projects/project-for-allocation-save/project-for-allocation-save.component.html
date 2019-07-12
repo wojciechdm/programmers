@@ -1,0 +1,116 @@
+<div class="container project-for-allocation-save-page">
+  <div class="row">
+    <div class="col-xs-12" *ngIf="projectResponse">
+      <h3>Projekty</h3>
+
+      <div>
+        <table class="table table-striped table-bordered project-for-allocation-save-table">
+          <thead>
+            <tr>
+              <th>
+                <div
+                  class="project-for-allocation-save-sort-header"
+                  (click)="onSort('ID')"
+                >
+                  <div *ngIf="isActualSort('ID', false)">
+                    <i class="pi pi-caret-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('ID', true)">
+                    <i class="pi pi-caret-down"></i>
+                  </div>
+                  <div>id</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="project-for-allocation-save-sort-header"
+                  (click)="onSort('NAME')"
+                >
+                  <div *ngIf="isActualSort('NAME', false)">
+                    <i class="pi pi-caret-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('NAME', true)">
+                    <i class="pi pi-caret-down"></i>
+                  </div>
+                  <div>nazwa</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="project-for-allocation-save-sort-header"
+                  (click)="onSort('CODE_NAME')"
+                >
+                  <div *ngIf="isActualSort('CODE_NAME', false)">
+                    <i class="pi pi-caret-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('CODE_NAME', true)">
+                    <i class="pi pi-caret-down"></i>
+                  </div>
+                  <div>nazwa kodowa</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="project-for-allocation-save-sort-header"
+                  (click)="onSort('START_DATE')"
+                >
+                  <div *ngIf="isActualSort('START_DATE', false)">
+                    <i class="pi pi-caret-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('START_DATE', true)">
+                    <i class="pi pi-caret-down"></i>
+                  </div>
+                  <div>data rozpoczęcia</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="project-for-allocation-save-sort-header"
+                  (click)="onSort('END_DATE')"
+                >
+                  <div *ngIf="isActualSort('END_DATE', false)">
+                    <i class="pi pi-caret-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('END_DATE', true)">
+                    <i class="pi pi-caret-down"></i>
+                  </div>
+                  <div>data zakończenia</div>
+                </div>
+              </th>
+              <th><div>status</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of projectResponse.data">
+              <td>{{ project.id }}</td>
+              <td>{{ project.name }}</td>
+              <td>{{ project.codeName }}</td>
+              <td>{{ project.startDate }}</td>
+              <td>{{ project.endDate }}</td>
+              <td>{{ project.status | projectStatus }}</td>
+              <td>
+                <button
+                  pButton
+                  type="button"
+                  (click)="onSelectProject(project)"
+                  icon="pi pi-check"
+                  class="ui-button-primary"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="project-for-allocation-save-paginator">
+        <p-paginator
+          [rows]="actualElementsPerPage"
+          [pageLinkSize]="10"
+          [totalRecords]="projectResponse.total"
+          [rowsPerPageOptions]="elementsPerPage"
+          (onPageChange)="onPageChange($event)"
+        ></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>

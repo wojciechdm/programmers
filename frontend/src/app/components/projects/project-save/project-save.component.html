@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Dodaj projekt</h3>
+
+      <div>
+        <form [formGroup]="saveProjectForm" (ngSubmit)="onSave()">
+          <label for="saveName">nazwa</label>
+          <input
+            class="form-control"
+            type="text"
+            id="saveName"
+            formControlName="name"
+            maxlength="100"
+          />
+
+          <label for="saveCodeName">nazwa kodowa</label>
+          <input
+            class="form-control"
+            type="text"
+            id="saveCodeName"
+            formControlName="codeName"
+            maxlength="20"
+          />
+
+          <div
+            class="project-save-validation-error-info"
+            *ngIf="saveProjectForm.get('codeName').errors?.pattern"
+          >
+            Nazwa kodowa może zawierać tylko duże litery i myślnik.
+          </div>
+
+          <label for="startDate">data rozpoczęcia</label>
+          <input
+            class="form-control"
+            type="date"
+            id="startDate"
+            formControlName="startDate"
+            max="9999-12-31"
+          />
+
+          <label for="endDate">data zakończenia</label>
+          <input
+            class="form-control"
+            type="date"
+            id="endDate"
+            formControlName="endDate"
+            max="9999-12-31"
+          />
+
+          <div>
+            <label for="status">status</label>
+            <select class="form-control" id="status" formControlName="status">
+              <option *ngFor="let stat of statuses" [value]="stat">{{
+                stat | projectStatus
+              }}</option>
+            </select>
+          </div>
+
+          <label for="saveClient">klient</label>
+          <div class="project-save-choose-client">
+            <button
+              pButton
+              type="button"
+              (click)="onSelectClient()"
+              class="ui-button-primary"
+              icon="pi pi-users"
+            ></button>
+            <input
+              class="form-control"
+              type="text"
+              id="saveClient"
+              formControlName="client"
+            />
+          </div>
+          <br />
+
+          <div class="project-save-save-cancel-buttons">
+            <div class="project-save-save-cancel-single-button">
+              <button
+                pButton
+                type="submit"
+                [disabled]="isInvalid()"
+                label="Dodaj"
+                icon="pi pi-plus"
+                class="ui-button-raised ui-button-success"
+              ></button>
+            </div>
+            <div class="project-save-save-cancel-single-button">
+              <button
+                pButton
+                type="button"
+                routerLink="/projects"
+                label="Anuluj"
+                icon="pi pi-times"
+                class="ui-button-raised ui-button-danger"
+              ></button>
+            </div>
+          </div>
+
+          <br />
+          <hr />
+        </form>
+      </div>
+
+      <p-toast
+        position="center"
+        key="notUniqueCodename"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-times" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid project-save-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="onConfirm()"
+                label="OK"
+                class="ui-button-danger"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <p-toast
+        position="center"
+        key="success"
+        [modal]="true"
+        [baseZIndex]="5000"
+      >
+        <ng-template let-message pTemplate="message">
+          <div style="text-align: center">
+            <i class="pi pi-info-circle" style="font-size: 3em"></i>
+            <h3>{{ message.summary }}</h3>
+            <p>{{ message.detail }}</p>
+          </div>
+          <div class="ui-g ui-fluid project-save-confirm-button">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                routerLink="/projects"
+                label="OK"
+                class="ui-button-success"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+    </div>
+  </div>
+</div>

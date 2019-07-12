@@ -1,0 +1,83 @@
+<div class="container client-for-project-save-paginator-page">
+  <div class="row">
+    <div class="col-xs-12" *ngIf="clientResponse">
+      <h3>Klienci</h3>
+
+      <div>
+        <table class="table table-striped table-bordered client-for-project-table">
+          <thead>
+            <tr>
+              <th>
+                <div
+                  class="client-for-project-save-sort-header"
+                  (click)="onSort('ID')"
+                >
+                  <div *ngIf="isActualSort('ID', false)">
+                    <i class="pi pi-sort-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('ID', true)">
+                    <i class="pi pi-sort-down"></i>
+                  </div>
+                  <div>id</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="client-for-project-save-sort-header"
+                  (click)="onSort('NAME')"
+                >
+                  <div *ngIf="isActualSort('NAME', false)">
+                    <i class="pi pi-sort-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('NAME', true)">
+                    <i class="pi pi-sort-down"></i>
+                  </div>
+                  <div>nazwa</div>
+                </div>
+              </th>
+              <th>
+                <div
+                  class="client-for-project-save-sort-header"
+                  (click)="onSort('CODE_NAME')"
+                >
+                  <div *ngIf="isActualSort('CODE_NAME', false)">
+                    <i class="pi pi-sort-up"></i>
+                  </div>
+                  <div *ngIf="isActualSort('CODE_NAME', true)">
+                    <i class="pi pi-sort-down"></i>
+                  </div>
+                  <div>nazwa kodowa</div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clientResponse.data">
+              <td>{{ client.id }}</td>
+              <td>{{ client.name }}</td>
+              <td>{{ client.codeName }}</td>
+              <td>
+                <button
+                  pButton
+                  type="button"
+                  (click)="onSelectClient(client)"
+                  icon="pi pi-check"
+                  class="ui-button-primary"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="client-for-project-save-paginator">
+        <p-paginator
+          [rows]="actualElementsPerPage"
+          [pageLinkSize]="10"
+          [totalRecords]="clientResponse.total"
+          [rowsPerPageOptions]="elementsPerPage"
+          (onPageChange)="onPageChange($event)"
+        ></p-paginator>
+      </div>
+    </div>
+  </div>
+</div>

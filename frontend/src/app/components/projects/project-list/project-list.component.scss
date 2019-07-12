@@ -1,0 +1,28 @@
+.project-list-sort-header {
+  cursor: pointer;
+  display: flex;
+}
+
+.project-list-add-delete-refresh-single-button {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.project-list-add-delete-refresh-buttons {
+  display: flex;
+}
+
+.project-list-paginator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.project-list-table th div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.project-list-table td {
+  text-align: center;
+}
