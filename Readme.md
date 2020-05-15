@@ -2,6 +2,8 @@
 
 Application for managing the IT company's structure, enabling operations of adding, removing, editing and downloading customers, employees and projects, as well as managing and validating assignments of employees to projects.
 
+Used technologies: Java 11, Maven, MySQL, Spring Boot, Hibernate, JWT Token, Testcontainers, Spock, JUnit, Mockito, Lombok, Angular 7, Bootstrap, PrimeNG.
+
 ### Setup database
 
 To create needed tables use scripts:
